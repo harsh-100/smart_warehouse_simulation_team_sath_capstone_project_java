@@ -152,7 +152,9 @@ If you prefer to use Docker commands directly, these are the exact commands the 
 docker build -t smart-warehouse-sim .
 
 # run with host X forwarding (you may need to allow X access first with `xhost +local:docker`)
-docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix smart-warehouse-sim mvn -f Simulation/pom.xml javafx:run -DskipTests
+docker run --rm -p 5900:5900 smart-warehouse-sim
+
+
 
 # run headless (container default entry: uses Xvfb)
 docker run --rm -it smart-warehouse-sim

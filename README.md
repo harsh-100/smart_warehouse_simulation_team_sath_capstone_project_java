@@ -25,14 +25,79 @@ Notes:
 - Each member added unit tests covering their modules.
 - The UI is created using JavaFX and the project uses Maven for building and dependency management.
 
-
-
 ## Demo & Presentation
 
 We have recorded a demo video and prepared a presentation for the project.
 
 - Demo (YouTube): https://youtu.be/KJV_wGJLeCE
-- Project PPT / Slides: https://docs.google.com/presentation/d/1p_9e43ztQ-rOSPFsf9Qwl8jNUqAZ4ECo/edit?slide=id.p18#slide=id.p18
+- Project PPT / Slides: https://docs.google.com/presentation/d/1p_9e43ztQ-rOSPFsf9Qwl8jNUqAZ4ECo/edit?usp=sharing&ouid=116256811549930036629&rtpof=true&sd=true
+
+## Project structure (high level)
+
+- Simulation/
+  - src/main/java — application code
+  - src/main/resources/fxml — JavaFX UI layout files
+  - src/test/java — unit tests
+  - pom.xml — Maven build configuration
+
+
+
+## Project setup — Run using Docker + VNC viewer
+
+Follow these 6 steps to get the project running inside Docker and view the GUI using a VNC viewer on your host machine.
+
+### 1) Clone the repository
+
+```bash
+git clone https://github.com/harsh-100/smart_warehouse_simulation_team_sath_capstone_project_java/
+```
+
+### 2) Change into the project directory
+
+```bash
+cd smart_warehouse_simulation_team_sath_capstone_project_java
+```
+
+### 3) Build the Docker image
+
+```bash
+docker build -t smart-warehouse-sim .
+```
+
+### 4) Run the container and forward the VNC port (5900)
+
+```bash
+docker run --rm -p 5900:5900 smart-warehouse-sim
+```
+
+Note: This image/container exposes a VNC server listening on container port 5900 and maps it to your host's port 5900. Make sure no other VNC server is already running on your host while you do this.
+
+### 5) Install a VNC viewer on your host (only the viewer is needed)
+
+- Windows: TightVNC (Download link: https://www.tightvnc.com/download.php)
+- Linux: install TigerVNC viewer
+
+```bash
+sudo apt install tigervnc-viewer
+```
+
+- macOS: install TigerVNC via Homebrew
+
+```bash
+brew install tigervnc
+```
+
+### 6) Connect with the VNC viewer
+
+Open your VNC viewer and connect to:
+
+```
+localhost:5900
+```
+
+7) You're done — you should see the application's GUI through the VNC viewer.
+
+_Note : You can check setup.md file if you face any issues here.
 
 
 ## Quick start
@@ -57,38 +122,6 @@ Run tests locally:
 mvn clean test
 ```
 
-## Docker (containerized) usage
-
-A Dockerfile and helper script are provided to build and run the project inside a container.
-
-Build the image:
-
-```bash
-docker build -t smart-warehouse-sim .
-```
-
-Run the app using your host X display (so the JavaFX window appears on your desktop):
-
-```bash
-# may need to allow X access first: xhost +local:docker
-docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix smart-warehouse-sim mvn -f Simulation/pom.xml javafx:run -DskipTests
-```
-
-Or use the provided helper script which builds the image and auto-forwards display when available:
-
-```bash
-chmod +x run_in_docker.sh
-./run_in_docker.sh         # runs the GUI (forwards host DISPLAY if available)
-./run_in_docker.sh test    # runs mvn -f Simulation/pom.xml test inside the container
-```
-
-## Project structure (high level)
-
-- Simulation/
-  - src/main/java — application code
-  - src/main/resources/fxml — JavaFX UI layout files
-  - src/test/java — unit tests
-  - pom.xml — Maven build configuration
 
 ## Notes and recommendations
 
