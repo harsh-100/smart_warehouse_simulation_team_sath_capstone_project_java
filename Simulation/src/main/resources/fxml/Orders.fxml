@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<VBox spacing="8" style="-fx-padding:10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.warehouse.simulation.app.ui.OrdersController">
+    <Label text="Orders" style="-fx-font-size:14px; -fx-font-weight:bold;" />
+    <ListView fx:id="ordersListView" prefHeight="400" />
+    <Label fx:id="orderDetailLabel" text="Select an order to see details" wrapText="true" />
+</VBox>

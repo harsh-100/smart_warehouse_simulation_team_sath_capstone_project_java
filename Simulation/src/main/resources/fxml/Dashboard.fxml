@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane fx:controller="com.warehouse.simulation.app.ui.DashboardController" xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <HBox spacing="10" style="-fx-padding:10">
+            <Label text="Smart Warehouse Dashboard (An Amazon Warehouse Simulation)" style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+        </HBox>
+    </top>
+    <left>
+        <VBox spacing="8" style="-fx-padding:10">
+            <Button text="Dashboard" onAction="#showDashboard" />
+            <Button text="Storage Units" onAction="#openStorageUnits" />
+            <Button text="Inventory" onAction="#openInventory" />
+            <Button text="AGV Panel" onAction="#openAGVPanel" />
+            <Button text="Orders" onAction="#openOrders" />
+            <Button text="Tasks" onAction="#openTasks" />
+            <Button text="Logs" onAction="#openLogs" />
+            <Button fx:id="flushButton" text="Flush All Data" onAction="#flushAllData" style="-fx-background-color:#f8d7da; -fx-text-fill:#721c24;" />
+            <!-- <Button fx:id="scenarioAButton" text="Scenario A" onAction="#runScenarioA" />
+            <Button fx:id="scenarioBButton" text="Scenario B" onAction="#runScenarioB" />
+            <Button fx:id="scenarioCButton" text="Scenario C" onAction="#runScenarioC" /> -->
+        </VBox>
+    </left>
+    <center>
+        <VBox fx:id="contentArea" style="-fx-padding:10" spacing="8">
+            <Label fx:id="simStatusLabel" text="Simulation: stopped" />
+            <Label fx:id="scenarioStatusLabel" text="Scenario: idle" />
+            <Label fx:id="pendingTasksLabel" text="Pending tasks: 0" />
+            <Label fx:id="completedTasksLabel" text="Completed tasks: 0" />
+            <Label fx:id="robotsHeadingLabel" text="Robots:" style="-fx-font-weight:bold" />
+            <?import javafx.scene.control.ListView?>
+            <ListView fx:id="robotListView" prefHeight="300" />
+        </VBox>
+    </center>
+</BorderPane>
