@@ -25,6 +25,16 @@ Notes:
 - Each member added unit tests covering their modules.
 - The UI is created using JavaFX and the project uses Maven for building and dependency management.
 
+
+
+## Demo & Presentation
+
+We have recorded a demo video and prepared a presentation for the project.
+
+- Demo (YouTube): https://youtu.be/KJV_wGJLeCE
+- Project PPT / Slides: [link-to-presentation-here]
+
+
 ## Quick start
 
 Prerequisites:
