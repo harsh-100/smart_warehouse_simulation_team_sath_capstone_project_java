@@ -32,7 +32,7 @@ Notes:
 We have recorded a demo video and prepared a presentation for the project.
 
 - Demo (YouTube): https://youtu.be/KJV_wGJLeCE
-- Project PPT / Slides: [link-to-presentation-here]
+- Project PPT / Slides: https://docs.google.com/presentation/d/1p_9e43ztQ-rOSPFsf9Qwl8jNUqAZ4ECo/edit?slide=id.p18#slide=id.p18
 
 
 ## Quick start
