@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MockTaskManager extends TaskManager {
 	
     public MockTaskManager() throws IOException { 
-    	super(); 
+    	super("mockTaskManager"); 
     	} 
     public Tasks taskToGive = null;
     public boolean taskWasCompleted = false;
@@ -168,8 +168,8 @@ public class RobotTest {
     @Test
     void testUpdateState_WhenWaitingInQueueAndTimeout_ChangesStateToIdle() {
         robot.setStateForTest(RobotState.WAITING_FOR_CHARGE);
-        long twoSecondsAgo = System.currentTimeMillis() - 2000;
-        robot.setWaitingStartTimeForTest(twoSecondsAgo); // MAX_WAIT_TIME_MS у тебя 1000
+        long twoSecondsAgo = System.currentTimeMillis() - 40000;
+        robot.setWaitingStartTimeForTest(twoSecondsAgo); 
         
         robot.updateState();
         
@@ -179,7 +179,7 @@ public class RobotTest {
     @Test
     void testUpdateState_WhenWaitingInQueueAndTimeout_CallsLeaveQueue() {
         robot.setStateForTest(RobotState.WAITING_FOR_CHARGE);
-        long twoSecondsAgo = System.currentTimeMillis() - 2000;
+        long twoSecondsAgo = System.currentTimeMillis() - 40000;
         robot.setWaitingStartTimeForTest(twoSecondsAgo);
 
         robot.updateState();
@@ -340,7 +340,7 @@ public class RobotTest {
         
         robot.performAction();
         
-        assertEquals(99.5, robot.getBattery()); 
+        assertEquals(97.0, robot.getBattery()); 
     }
     
     @Test
@@ -350,7 +350,7 @@ public class RobotTest {
         
         robot.performAction();
         
-        assertEquals(54.0, robot.getBattery()); // 50 + CHARGE_RATE (4.0)
+        assertEquals(54.0, robot.getBattery()); 
     }
     
     @Test

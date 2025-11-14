@@ -57,12 +57,12 @@ public class Robot implements Runnable, IGridEntity  {
 
     // ----------- for second simulation ---------
     private long waitingStartTime;
-    private static final long MAX_WAIT_TIME_MS = 1000;  // 15 seconds for test
+    private static final long MAX_WAIT_TIME_MS = 30000;  // 15 seconds for test
     //----------------------------------------
     
     private static final double MAX_BATTERY = 100.0;
     private static final double LOW_BATTERY_THRESHOLD = 50.0;
-    private static final double BATTERY_COST_PER_MOVE = 0.5;
+    private static final double BATTERY_COST_PER_MOVE = 3; // ------------------------------------------------
     private static final double CHARGE_RATE_PER_TICK = 4.0;
     // Make tasks last roughly 10 seconds: with TICK_DELAY_MS=100ms, 100 ticks ≈ 10s
     private static final int TASK_DURATION_IN_TICKS = 100; // increased to show progress in UI (~10s)
@@ -172,15 +172,19 @@ public class Robot implements Runnable, IGridEntity  {
             
         }
 
-        else if (state == RobotState.CHARGING && this.chargeTimer >= CHARGING_DURATION_IN_TICKS) {
+        else if (state == RobotState.CHARGING && this.batteryLevel >= MAX_BATTERY) {
+        	
             this.batteryLevel = MAX_BATTERY;
             this.chargeTimer = 0;
+            
             if (this.currentStation != null) {
                 warehouse.releaseStation(this.currentStation);
                 this.currentStation = null;
             }
+            
             this.state = RobotState.MOVING_TO_IDLE_POINT;
             this.currentPath = pathFinder.findPath(this.currentPosition, warehouse.getIdleLocation());
+            System.out.println(warehouse.getIdleLocation());
         }
 
         else if (state == RobotState.MOVING_TO_IDLE_POINT && (currentPath == null || currentPath.isEmpty())){
