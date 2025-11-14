@@ -34,7 +34,7 @@ public class Robot implements Runnable, IGridEntity  {
         MOVING_TO_CHARGE,
         MOVING_TO_IDLE_POINT
     }
-    private enum WorkingState {
+    public enum WorkingState {
         GOING_TO_PICKUP,
         GOING_TO_DROPOFF
     }
@@ -165,8 +165,11 @@ public class Robot implements Runnable, IGridEntity  {
         }
 
         else if (state == RobotState.MOVING_TO_CHARGE && (currentPath == null || currentPath.isEmpty())){
+        	
             this.state = RobotState.CHARGING;
             this.chargeTimer = 0;
+            
+            
         }
 
         else if (state == RobotState.CHARGING && this.chargeTimer >= CHARGING_DURATION_IN_TICKS) {
@@ -334,7 +337,7 @@ public class Robot implements Runnable, IGridEntity  {
 
     }
 
-    public void assignStation(ChargingStation station) {
+    public boolean assignStation(ChargingStation station) {
         if (this.state == RobotState.WAITING_FOR_CHARGE) {
             this.currentStation = station;
             this.state = RobotState.CHARGING;
@@ -342,7 +345,10 @@ public class Robot implements Runnable, IGridEntity  {
             this.currentPosition = station.getLocation();
 
             // logs in the future
+            return true;
         }
+        
+        return false;
     }
     
     
@@ -381,6 +387,43 @@ public class Robot implements Runnable, IGridEntity  {
     
     public void setTaskTimerForTest(int t) {
         this.taskTimer = t;
+    }
+
+    public void setStateForTest(RobotState state) {
+        this.state = state;
+    }
+
+    public void setWorkingStateForTest(WorkingState state) {
+        this.workingState = state;
+    }
+
+    public void setStationForTest(ChargingStation station) {
+        this.currentStation = station;
+    }
+
+    public void setCurrentTaskForTest(Tasks task) {
+        this.currentTask = task;
+    }
+
+    public void setCurrentPathForTest(Queue<Point> path) {
+        this.currentPath = path;
+    }
+
+    public void setWaitingStartTimeForTest(long timeMs) {
+        this.waitingStartTime = timeMs;
+    }
+
+    public WorkingState getWorkingState() {
+        return this.workingState;
+    }
+
+    public Queue<Point> getCurrentPath() {
+        return this.currentPath;
+    }
+    
+    public Robot(TaskManager tm) {
+    	this.id = "test_id";
+    	this.taskManager = tm;
     }
 
     /**
